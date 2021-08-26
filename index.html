@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <script>
+            const QUOTEBANK = [
+                {
+                   quote:"I'm thankful for every moment.",
+                   author: "Al Green"
+                },{
+                   quote: "Whether you're rich or poor, life's still cold-blooded.",
+                   author: "Rick James"
+                },{
+                   quote: "Sometimes you struggle so hard to feed your family one way, you forget to feed them the other way, with spiritual nourishment. Everybody needs that.",
+                   author: "James Brown"
+                },{
+                   quote: "Don't you mind people grinnin' in your face",
+                   author: "Son House"
+                }
+            ];
+            window.onload = init;
+            function init(){
+               generateQuote()
+            }
+            function generateQuote(){
+                let quoteSize =QUOTEBANK.length;
+                let randomIndex = Math.floor(Math.random() * quoteSize)
+                let randomQuoteData= QUOTEBANK[randomIndex];
+
+                let twitterLink = "https://twitter.com/intent/tweet?hashtags=quotes&amp;related=freecodecamp&amp;text=";
+                
+                //Add the quote
+                let quoteInApiFormat = randomQuoteData.quote.replace(/ /g, "%20");
+                twitterLink += quoteInApiFormat
+                
+                // Add the author 
+               let authorInApiFormat = randomQuoteData.author.replace(/ /g, "%20");
+               twitterLink += " - " + authorInApiFormat
+
+                document.getElementById('tweet-quote').href = twitterLink;
+                document.getElementById("text").innerText =  randomQuoteData.quote;
+                document.getElementById("author").innerText =  randomQuoteData.author;
+            }
+                
+        </script>
+        <style>
+            *{
+                font-size: 1.5rem;
+                padding: 20px 20px 20px;
+                text-align: center;
+            }
+        </style>
+    </head> 
+
+    <body>
+        <wrapper id="quote-box">
+            <div id="text"></div>
+            <div id="author"></div>
+            <button id="new-quote" onClick="generateQuote()">New Quote</button>
+            <a href="#" id="tweet-quote" target = "_blank" class="button">Tweet Quote</a>
+        </wrapper>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    </body>  
+</html>
